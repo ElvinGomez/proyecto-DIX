@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title><!-- Titulo -->
+  <!-- Estilos -->
+  <style>
+    .login{
+        margin: auto;
+        width: 50%;
+        border: 1px solid green;
+        padding: 10px;
+
+    }
+    #credentialsBox {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
+  </style>
+  <script>
+    function validate() {//Funcion de validacion.
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username === "usuario_MD" && password === "nefrologodp") {
+        localStorage.setItem("username", username);
+        window.location.href = "BH.html";
+      } else if (username === "usuario_ENF" && password === "enfermeriadp") {
+        localStorage.setItem("username", username);
+        window.location.href = "BH.html";
+      } else if (username === "usuario_PD" && password === "pacientedp") {
+        localStorage.setItem("username", username);
+        window.location.href = "BH.html";
+      } else {
+        alert("Usuario o contraseña incorrectas.");
+      }
+    }
+    function validate2() {//Funcion de validacion para el boton 2.
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username === "usuario_MD" && password === "nefrologodp") {
+        localStorage.setItem("username", username);
+        window.location.href = "BH.html";
+      } else if (username === "usuario_ENF" && password === "enfermeriadp") {
+        localStorage.setItem("username", username);
+        window.location.href = "BH.html";
+      } else if (username === "usuario_PD" && password === "pacientedp") {
+        localStorage.setItem("username", username);
+        window.location.href = "BH.html";
+      } else {
+        alert("Usuario o contraseña incorrectas.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="credentialsBox">  <!-- Caja que contiene credenciales que funcionan -->
+    <strong>Credenciales:</strong><br>
+    - usuario_MD / nefrologodp<br>
+    - usuario_ENF / enfermeriadp<br>
+    - usuario_PD / pacientedp<br>
+  </div>
+  <div class="login">
+    <h2>Login </h2>
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br>
+  
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
+  
+      <input type="button" value="Login" onclick="validate()">  <!-- Boton 1 -->
+      <input type="button" value="Citas" onclick="validate2()">  <!-- Boton 2 -->
+    </form></div>
+  
+</body>
+</html>

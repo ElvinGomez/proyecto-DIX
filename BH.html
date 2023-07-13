@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="calc.js"></script>  <!-- Llamado a calc.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>  <!-- Llamado al script de Jspdf -->
+  <title>REPORTE DE BALANCE HÍDRICO - DIÁLISIS PERITONEAL</title>  <!-- Titulo Backend -->
+    <!-- Ignorar estilos css -->
+  <style>
+    .number-input {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    .title {
+      color: red;
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 20vh;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      margin: 0 20px;
+    }
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .label {
+      font-weight: bold;
+    }
+    .input-field {
+      width: 200px;
+    }
+    .dropdown-field {
+      width: 200px;
+    }
+    .auto-field {
+      font-style: italic;
+    }
+    table {
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    th,
+    td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+    th:first-child,
+    td:first-child {
+      background-color: #333333;
+      color: white;
+    }
+    th,
+    tr:first-child {
+      background-color: #666666;
+      color: white;
+    }
+  </style>
+    <!-- Aqui terminan los estilos -->
+  <script>
+    function getCurrentDateTime() {//Funcion que busca la fecha y hora
+      var now = new Date();
+      var currentDate = now.toLocaleDateString();
+      var currentTime = now.toLocaleTimeString();
+      
+      document.getElementById("dateAuto").value = currentDate;
+      document.getElementById("timeAuto").value = currentTime;
+    }
+    
+    function displayUsername() {//Funcion que usa el username con el que se logeo - username vale lo que vale el username utilizado.
+      var username = localStorage.getItem("username");
+      if (username) {
+        document.getElementById("user").textContent = "Logeado como: " + username;
+      }
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      getCurrentDateTime();//llamado de funcion
+      displayUsername();//**********************
+    });
+  </script>
+</head>
+<body>
+  <h2 class="title">REPORTE DE BALANCE HÍDRICO - DIÁLISIS PERITONEAL</h2>  <!-- Titulo rojo -->
+  
+  <div class="container">
+    <div class="column">
+      <div id="user"></div><!-- div que cambia al abrir la pagina que cambia a logeado como (user) -->
+
+      <div class="input-container"><!-- paciente -->
+        <label class="label" for="paciente">Paciente:</label>
+        <input class="input-field" type="text" id="pc" name="paciente"><!-- id = pc -->
+      </div>
+
+      <div class="input-container"><!-- Input de Fecha -->
+        <label class="label" for="date">Fecha:</label>
+        <input class="input-field" type="text" id="date" name="date"><!-- id = date -->
+      </div>
+
+      <div class="input-container"><!-- Dropdown de sistema -->
+        <label class="label" for="system">Sistema:</label>
+        <select class="dropdown-field" id="sys" name="system"><!-- id = sys -->
+          <option value="Baxter">Baxter</option>
+          <option value="Fresenius Medical Care">Fresenius Medical Care</option>
+        </select>
+      </div>
+
+      <div class="input-container"><!-- Presion arterial, en medio de pa y pa2 hay un / con brackets h2 -->
+        <label class="label" for="pa">P/A:</label>
+        <input class="number-input" type="number" id="pa" name="pa"><!-- id = pa -->
+        <h2>/</h2>
+        <input class="number-input" type="number" id="pa2" name="pa2"><!-- id = pa2 -->
+      </div>
+
+      <div class="input-container"><!-- pulso -->
+        <label class="label" for="pulse">Pulso:</label>
+        <input class="input-field" type="text" id="pls" name="pulse"><!-- id = pls -->
+      </div>
+    </div>
+
+    <div class="column"><!-- Estas son los "inputs" que reciben la fecha y la hora automaticamente -->
+      <div class="input-container">
+        <label class="label" for="dateAuto">Fecha:</label>
+        <input class="auto-field" type="text" id="dateAuto" name="dateAuto" readonly><!-- id = dateAuto -->
+      </div>
+
+      <div class="input-container">
+        <label class="label" for="timeAuto">Hora:</label>
+        <input class="auto-field" type="text" id="timeAuto" name="timeAuto" readonly><!-- id = timeAuto -->
+      </div>
+    </div>
+  </div>
+  
+  <table><!-- Esta es la tabla -->
+    <tr>
+        <th></th>
+        <th colspan="2">Fase I</th>
+        <th colspan="2">Fase II</th>
+        <th></th>
+      </tr>
+    <tr>
+      <th>Recambio</th>
+      <th>Concentracion (%)</th>
+      <th>Infusión</th>
+      <th>Drenaje (ml.)</th>
+      <th>Cualidad</th>
+      <th>Balance</th>
+    </tr>
+    <tr>
+      <th>1</th><!-- Cada tr son las celdas desde la primera hasta la ultima(no incluye la que tiene la leyenda, ejemplo: no incluye la que dice concentracion ni infusion ni ninguna de esas) -->
+      <td><select id="co1" class="dropdown-field" class="concentracion" name="concentracion"><!-- id = co(numero) sin el parentesis -->
+        <option value="1.5%">1.5%</option>
+        <option value="2.5%">2.5%</option>
+        <option value="7.5%">7.5%</option>
+      </select></td>
+      <td>2000 ml.</td><!-- esta siempre es 2000 asi que no cambia, si se quiere usar el id se debe asignar uno, pero para facilidad de uso se utiliza 2000 cada vez que se requiera. -->
+      <td><input id="dr1" class="number-input" type="number" min="0" max="9999" step="1"></td><!-- id = dr(numero) sin el parentesis -->
+      <td><select id="cu1" class="dropdown-field" class="cualidad" name="cualidad"><!-- id = cu(numero) sin el parentesis -->
+        <option value="Claro">Claro(Normal)</option>
+        <option value="Turbio">Turbio(con irregularidad)</option>
+      </select></td>
+      <td><input id="tot1" disabled="true" class="input-field" type="text" name="total1"></td><!-- id = tot(numero) sin el parentesis -->
+    </tr>
+    <tr><!-- Aqui empieza la segunda, de aqui a la cuarta se repite lo mismo que lo de arriba pero con el numero cambiado dependiendo de cual sea. -->
+      <th>2</th>
+      <td><select id="co2" class="dropdown-field" class="concentracion" name="concentracion">
+        <option value="1.5%">1.5%</option>
+        <option value="2.5%">2.5%</option>
+        <option value="7.5%">7.5%</option>
+      </select></td>
+      <td>2000 ml.</td>
+      <td><input id="dr2" class="number-input" type="number" min="0" max="9999" step="1"></td>
+      <td><select id="cu2" class="dropdown-field" class="cualidad" name="cualidad">
+        <option value="Claro">Claro(Normal)</option>
+        <option value="Turbio">Turbio(con irregularidad)</option>
+      </select></td>
+      <td><input id="tot2" disabled="true" class="input-field" type="text" name="total2"></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td><select id="co3" class="dropdown-field" class="concentracion" name="concentracion">
+        <option value="1.5%">1.5%</option>
+        <option value="2.5%">2.5%</option>
+        <option value="7.5%">7.5%</option>
+      </select></td>
+      <td>2000 ml.</td>
+      <td><input id="dr3" class="number-input" type="number" min="0" max="9999" step="1"></td>
+      <td><select id="cu3" class="dropdown-field" class="cualidad" name="cualidad">
+        <option value="Claro">Claro(Normal)</option>
+        <option value="Turbio">Turbio(con irregularidad)</option>
+      </select></td>
+      <td><input id="tot3" disabled="true" class="input-field" type="text" name="total3"></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td><select id="co4" class="dropdown-field" class="concentracion" name="concentracion">
+        <option value="1.5%">1.5%</option>
+        <option value="2.5%">2.5%</option>
+        <option value="7.5%">7.5%</option>
+      </select></td>
+      <td>2000 ml.</td>
+      <td><input id="dr4" class="number-input" type="number" min="0" max="9999" step="1"></td>
+      <td><select id="cu4" class="dropdown-field" class="cualidad" name="cualidad">
+        <option value="Claro">Claro(Normal)</option>
+        <option value="Turbio">Turbio(con irregularidad)</option>
+      </select></td>
+      <td><input id="tot4" disabled="true" class="input-field" type="text" name="total4"></td>
+    </tr>
+    <tr>
+    <tr>
+      <th>Total:</th><!-- La fila de los totales. totI es el total de infusion que siempre es 8000, totD es el total de drenaje que depende de los inputs de arriba. totF es 8000 menos totD -->
+      <td></td>
+      <td><input id="totI" disabled="true" class="input-field" type="text" name="totalI" value="8000"></td><!-- Todo tiene un id unico para poder usarse donde sea -->
+      <td><input id="totD" disabled="true" class="input-field" type="text" name="totalD"></td>
+      <td></td>
+      <td><input id="totF" disabled="true" class="input-field" type="text" name="totalFinal"></td>
+    </tr>
+  </table>
+  <script>
+    function genpdf(){// Generacion de PDF
+    var title = document.title;// Aqui se asigna cada valor a guardar a una variable para poder usarlo en el jspdf.
+    var name = document.getElementById('pc').value; var date = document.getElementById('dateAuto').value; var sys = document.getElementById('sys').value; var pa = document.getElementById('pa').value; var pa2 = document.getElementById('pa2').value; var pls = document.getElementById('pls').value;
+    var co1 = document.getElementById('co1').value; var co2 = document.getElementById('co2').value; var co3 = document.getElementById('co3').value; var co4 = document.getElementById('co4').value;
+    var dr1 = document.getElementById('dr1').value; var dr2 = document.getElementById('dr2').value; var dr3 = document.getElementById('dr3').value; var dr4 = document.getElementById('dr4').value;
+    var cu1 = document.getElementById('cu1').value; var cu2 = document.getElementById('cu2').value; var cu3 = document.getElementById('cu3').value; var cu4 = document.getElementById('cu4').value;
+    var tot1 = document.getElementById('tot1').value; var tot2 = document.getElementById('tot2').value; var tot3 = document.getElementById('tot3').value; var tot4 = document.getElementById('tot4').value;
+    var totD = document.getElementById('totD').value; var totF = document.getElementById('totF').value;
+
+
+    // Generate the PDF
+    var doc = new jsPDF();
+    doc.text('Title: ' + title, 10, 10);//titulo del pdf
+    doc.text([//Cuerpo del pdf, debe hacerse en formato de arreglo para que tenga corte de lineas.
+        "nombre: " + name , 
+        "fecha: " + date , 
+        'Sistema: ' + sys, 
+        'Presion Arterial: ' + pa +'/'+ pa2 , 
+        'Pulso: ' + pls,
+        'Concentracion: ' + co1 + " Infusión: 2000 ml. " + dr1 + " " + cu1 + " " + tot1,
+        'Concentracion: ' + co2 + " Infusión: 2000 ml. " + dr2 + " " + cu2 + " " + tot2,
+        'Concentracion: ' + co3 + " Infusión: 2000 ml. " + dr3 + " " + cu3 + " " + tot3,
+        'Concentracion: ' + co4 + " Infusión: 2000 ml. " + dr4 + " " + cu4 + " " + tot4,
+        'Concentracion: ' + " " + " Total Infusión: 8000 ml. " +" Total drenaje: "+ totD  +"- Total Final: " + totF
+], 10, 20,);
+    doc.save('document.pdf'); // Descarga el pdf
+}
+  </script>
+  <div class="container">
+    <input type="button" value="Calcular" onclick="calcularBh()"><!-- calcular los valores en la tabla -->
+    <input type="button" id="genPDF" value="Descargar" onclick="genpdf()"><!-- generar el pdf -->
+    <input type="button" value="Gráfico" onclick="">
+  </div>
+</body>
+</html>
