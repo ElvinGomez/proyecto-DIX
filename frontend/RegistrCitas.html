@@ -54,7 +54,7 @@
         <p>
             <label for="medico">Médico:</label>
             <select id="medico" required>
-                <option value="MD-MEDICO GENERAL">MD-Médico General</option>
+                <option value="MD-MEDICO GENERAL" selected>MD-Médico General</option>
                 <option value="NF-ROCIO ARROYO">NF-Rocío Arroyo</option>
                 <option value="NF-NADJI NOVOA">NF-Nadjí Novoa</option>
             </select>
@@ -63,7 +63,7 @@
 		<p>
 			<label for="motivo-cita">Motivo de la Cita:</label>
 			<select id="motivo-cita" required>
-				<option value="REVISION GENERAL">Revisión General</option>
+				<option value="REVISION GENERAL" selected>Revisión General</option>
 				<option value="CAMBIO DE LINEA">Cambio de Línea</option>
 				<option value="CURACION CATETER">Curación de Catéter</option>
 				<option value="CONTROL ENFERMERIA">Control Enfermería</option>
@@ -71,7 +71,7 @@
 			</select>
 		</p>
 
-		<p class="cajaOtro">
+		<p class="cajaOtro" style="display: none;">
 			<label class="OtroL" for="otro-motivo">Otro:</label>
 			<textarea type="text" id="otro-motivo" rows="4" cols="50"></textarea>
 		</p>

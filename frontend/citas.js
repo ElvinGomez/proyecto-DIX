@@ -1,3 +1,12 @@
+$('#motivo-cita').change(function () {
+  const selectedOption = $(this).val();
+  if (selectedOption === 'OTRO') {
+      $('.cajaOtro').show();
+  } else {
+      $('.cajaOtro').hide();
+  }
+});
+
 let specialty = $('#especialidad').val()
 let doctor = $('#medico').val()
 let reason = $('#motivo-cita').val()
@@ -34,6 +43,7 @@ function addRecord(){
     $.post({ url: `http://127.0.0.1:3000/api/v1/medical_appointment/add`, data: JSON.stringify(data), contentType: "application/json",
       success: function(response) {
         console.log("Response from the server:", response);
+        alert('Cita guardada correctamente')
       },
       error: function(xhr, status, error) {
         console.error("Error:", error);

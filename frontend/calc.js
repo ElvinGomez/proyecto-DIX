@@ -164,19 +164,19 @@ function calcularBh(){
 
         
         document.getElementById('analysis-result-container').style.display= 'block' ;
-        // enviarCorreo(medAlerts)
+        enviarCorreo(medAlerts)
         addRecord({
-          patient: "aaa",
+          patient: pc,
           "social_number": "1111",
           "id_number": "1111",
           "date": `${new Date()}`,
           // "blood_pressure_systolic": "",
           // "blood_pressure_diastolic": "",
           // "blood_pressure_pulse": "",
-          "concentration": ["1"],
-          "infusion": ["1"],
-          "drainage": [2000,0],
-          "quality": ["test quality"],
+          "concentration": [""],
+          "infusion": [""],
+          "drainage": [0],
+          "quality": [""],
           "balance": btValues,
           "total_infusion": 8000,
           "total_drainage": totalDr,
