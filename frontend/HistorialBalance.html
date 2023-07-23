@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Historial de Balance</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script></script>
+	<style>
+		/* Estilo adicional */
+		.table-box {
+			border: 1px solid #dee2e6;
+			padding: 10px;
+			border-radius: 5px;
+		}
+		.table-box th,
+		.table-box td {
+			border: 1px solid #dee2e6;
+			padding: 8px 15px; /* Ajuste del padding horizontal */
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container mt-4">
+		<h1>HISTORIA DE BALANCE HIDRICO - DIALISIS PERITONEAL</h1>
+
+		<!-- Formuolario para realizar consulta -->
+		<form id="form-consulta">
+			<div class="form-group">
+				<label for="tipo-consulta">Tipo de consulta</label>
+				<select class="form-control" id="tipo-consulta" required>
+					<option value="fecha">Fecha</option>
+					<option value="cedula">Cédula</option>
+					<option value="seguro-social">Seguro Social</option>
+				</select>
+			</div>
+
+			<br>
+			<br>
+			<br>
+
+			<div class="form-group" id="grupo-fecha">
+				<div class="form-row">
+					<div class="col">
+						<label for="fecha-inicio">Desde:&nbsp;</label>
+						<input type="date" class="form-control" id="fecha-inicio" required>
+
+						<label for="fecha-fin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hasta:&nbsp;</label>
+						<input type="date" class="form-control" id="fecha-fin" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group" id="grupo-cedula" style="display: none;">
+				<label for="cedula">Cédula:</label>
+				<input type="text" class="form-control" id="cedula">
+			</div>
+
+			<div class="form-group" id="grupo-seguro-social" style="display: none;">
+				<label for="seguro-social">Seguro Social:</label>
+				<input type="text" class="form-control" id="seguro-social">
+			</div>
+
+			<br>
+
+			<!-- Tabla de historial -->
+			<div class="table-box mt-4">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>FECHA</th>
+							<th>RECAMBIO 1</th>
+							<th>RECAMBIO 2</th>
+							<th>RECAMBIO 3</th>
+							<th>RECAMBIO 4</th>
+							<th>TOTAL DIA</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+
+			<button type="sumit" class="btn-primary mt-3">Consultar</button>
+		</form>
+	</div>
+
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+
+	<script>
+		// Mostrar y ocultar los campos segun el tipo de consulta que se seleccione
+
+		$('#tipo-consulta').change(function () {
+			const tipoConsulta = $(this).val();
+
+			if (tipoConsulta === 'fecha') {
+				$('#grupo-fecha').show();
+				$('#grupo-cedula').hide();
+				$('#grupo-seguro-social').hide();
+			} else if (tipoConsulta === 'cedula') {
+				$('#grupo-fecha').hide();
+				$('#grupo-cedula').show();
+				$('#grupo-seguro-social').hide();
+			} else if (tipoConsulta === 'seguro-social') {
+				$('#grupo-fecha').hide();
+				$('#grupo-cedula').hide();
+				$('#grupo-seguro-social').show();
+			}
+		});
+	</script>
+</body>
+</html>
