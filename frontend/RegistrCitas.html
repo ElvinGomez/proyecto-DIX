@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registro de Citas</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<style>
+		.cajaOtro {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.OtroL {
+			margin-right: 10px;
+			min-width: 80px;
+		}
+
+		#registrarBtn {
+			font-size: 16px;
+			padding: 10px 20px;
+			background-color: blue;
+			color: white;
+			border: none;
+			cursor: pointer;
+			background-color: skyblue;
+		}
+	</style>
+</head>
+<body>
+	<h1>Registro de Citas</h1>
+
+	<!-- Formulario para registrar nueva cita -->
+	<form id="citasForm">
+		<p>
+			<label for="paciente">Paciente:</label>
+			<input type="text" id="paciente" required>
+		</p>
+
+		<p>
+			<label for="cedula">Cédula:</label>
+			<input type="text" id="cedula" required>
+		</p>
+
+		<p>
+			<label for="especialidad">Especialidad:</label>
+			<select id="especialidad" required>
+				<option value="MD-MEDICO GENERAL">MD-Médico General</option>
+				<option value="NF-ROCIO ARROYO">NF-Rocío Arroyo</option>
+				<option value="NF-NADJI NOVOA">NF-Nadjí Novoa</option>
+			</select>
+		</p>
+
+		<p>
+			<label for="motivo-cita">Motivo de la Cita:</label>
+			<select id="motivo-cita" required>
+				<option value="REVISION GENERAL">Revisión General</option>
+				<option value="CAMBIO DE LINEA">Cambio de Línea</option>
+				<option value="CURACION CATETER">Curación de Catéter</option>
+				<option value="CONTROL ENFERMERIA">Control Enfermería</option>
+				<option value="OTRO">Otro</option>
+			</select>
+		</p>
+
+		<p class="cajaOtro">
+			<label class="OtroL" for="otro-motivo">Otro:</label>
+			<textarea type="text" id="otro-motivo" rows="4" cols="50"></textarea>
+		</p>
+
+		<br>
+
+		<p>
+			<button type="button" id="registrarBtn">REGISTRAR</button>
+		</p>
+
+	</form>
+</body>
+</html>
