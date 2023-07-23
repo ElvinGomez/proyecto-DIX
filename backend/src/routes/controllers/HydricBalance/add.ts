@@ -20,11 +20,13 @@ export const add = async (req: Request, res: Response, next: NextFunction): Prom
         total_balance
     } = req.body;
     try {
+        const dt = new Date(date)
+        dt.setHours(0,0,0,0)
         const newRecord = Database.getInstance().hydricBalance.build({
             social_number,
             id_number,
             patient,
-            date,
+            date: dt,
             blood_pressure_systolic,
             blood_pressure_diastolic,
             blood_pressure_pulse,

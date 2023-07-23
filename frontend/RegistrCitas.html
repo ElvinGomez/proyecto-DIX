@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Registro de Citas</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 	<style>
 		.cajaOtro {
 			display: flex;
@@ -44,13 +44,21 @@
 		</p>
 
 		<p>
-			<label for="especialidad">Especialidad:</label>
-			<select id="especialidad" required>
-				<option value="MD-MEDICO GENERAL">MD-Médico General</option>
-				<option value="NF-ROCIO ARROYO">NF-Rocío Arroyo</option>
-				<option value="NF-NADJI NOVOA">NF-Nadjí Novoa</option>
-			</select>
-		</p>
+            <label for="especialidad">Especialidad:</label>
+            <select id="especialidad" required>
+                <option value="dialisis p." selected>Dialisis P.</option>
+                <option value="NF-ROCIO ARROYO">Hemodialisis</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="medico">Médico:</label>
+            <select id="medico" required>
+                <option value="MD-MEDICO GENERAL">MD-Médico General</option>
+                <option value="NF-ROCIO ARROYO">NF-Rocío Arroyo</option>
+                <option value="NF-NADJI NOVOA">NF-Nadjí Novoa</option>
+            </select>
+        </p>
 
 		<p>
 			<label for="motivo-cita">Motivo de la Cita:</label>
@@ -71,9 +79,10 @@
 		<br>
 
 		<p>
-			<button type="button" id="registrarBtn">REGISTRAR</button>
+			<button type="button" id="registrarBtn" onclick="addRecord()">REGISTRAR</button>
 		</p>
 
 	</form>
+	<script src="./citas.js"></script>
 </body>
 </html>

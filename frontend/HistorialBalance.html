@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Historial de Balance</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script></script>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+	
 	<style>
 		/* Estilo adicional */
 		.table-box {
@@ -25,7 +25,7 @@
 		<h1>HISTORIA DE BALANCE HIDRICO - DIALISIS PERITONEAL</h1>
 
 		<!-- Formuolario para realizar consulta -->
-		<form id="form-consulta">
+		<div id="form-consulta">
 			<div class="form-group">
 				<label for="tipo-consulta">Tipo de consulta</label>
 				<select class="form-control" id="tipo-consulta" required>
@@ -43,10 +43,10 @@
 				<div class="form-row">
 					<div class="col">
 						<label for="fecha-inicio">Desde:&nbsp;</label>
-						<input type="date" class="form-control" id="fecha-inicio" required>
+						<input type="date" class="form-control" id="fecha-inicio">
 
 						<label for="fecha-fin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hasta:&nbsp;</label>
-						<input type="date" class="form-control" id="fecha-fin" required>
+						<input type="date" class="form-control" id="fecha-fin">
 					</div>
 				</div>
 			</div>
@@ -76,72 +76,16 @@
 							<th>TOTAL DIA</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-						</tr>
+					<tbody id="table-data">
 					</tbody>
 				</table>
 			</div>
 
 			<br>
 
-			<button type="sumit" class="btn-primary mt-3">Consultar</button>
-		</form>
+			<button type="sumit" class="btn-primary mt-3" onclick="searchRecord()">Consultar</button>
+		</div>
 	</div>
-
-	<!-- jquery -->
-	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-
-	<script>
-		// Mostrar y ocultar los campos segun el tipo de consulta que se seleccione
-
-		$('#tipo-consulta').change(function () {
-			const tipoConsulta = $(this).val();
-
-			if (tipoConsulta === 'fecha') {
-				$('#grupo-fecha').show();
-				$('#grupo-cedula').hide();
-				$('#grupo-seguro-social').hide();
-			} else if (tipoConsulta === 'cedula') {
-				$('#grupo-fecha').hide();
-				$('#grupo-cedula').show();
-				$('#grupo-seguro-social').hide();
-			} else if (tipoConsulta === 'seguro-social') {
-				$('#grupo-fecha').hide();
-				$('#grupo-cedula').hide();
-				$('#grupo-seguro-social').show();
-			}
-		});
-	</script>
+	<script src="./consulta.js"></script>
 </body>
 </html>

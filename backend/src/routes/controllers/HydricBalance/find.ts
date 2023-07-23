@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { NextFunction, Request, Response } from 'express';
 import Database from '@database/index';
 import {Op} from 'sequelize'
@@ -10,9 +9,16 @@ export const find = async (req: Request, res: Response, next: NextFunction): Pro
     let response = [];
     let query = {}
     if(startDate && endDate){
+        const _startDate = new Date(startDate?.toString())
+
+        const _endDate = new Date(endDate?.toString())
+        _endDate.setDate(_endDate.getDate() + 1)
         query = {
             date: {
-                [Op.between]: [new Date(startDate?.toString()) ?? '', new Date(endDate?.toString()) ?? '']
+                [Op.and]: {
+                    [Op.gte]: _startDate ?? '',
+                    [Op.lte]: _endDate ?? ''
+                }
             }
         }
     }

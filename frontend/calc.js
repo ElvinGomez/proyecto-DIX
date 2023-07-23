@@ -164,7 +164,24 @@ function calcularBh(){
 
         
         document.getElementById('analysis-result-container').style.display= 'block' ;
-        enviarCorreo(medAlerts)
+        // enviarCorreo(medAlerts)
+        addRecord({
+          patient: "aaa",
+          "social_number": "1111",
+          "id_number": "1111",
+          "date": `${new Date()}`,
+          // "blood_pressure_systolic": "",
+          // "blood_pressure_diastolic": "",
+          // "blood_pressure_pulse": "",
+          "concentration": ["1"],
+          "infusion": ["1"],
+          "drainage": [2000,0],
+          "quality": ["test quality"],
+          "balance": btValues,
+          "total_infusion": 8000,
+          "total_drainage": totalDr,
+          "total_balance": totFinalValue
+        })
     }   
     tots()// llamado de la funcion
 
@@ -197,7 +214,7 @@ function calcularBh(){
           console.error('Error al enviar el correo', error);
         });
     }
-
+    
 }
 
 let myChart;
@@ -234,6 +251,17 @@ function showChart(){
           beginAtZero: true
         }
       }
+    }
+  });
+}
+
+function addRecord(data){
+  $.post({ url: `http://127.0.0.1:3000/api/v1/hydricbalance/add`, data: JSON.stringify(data), contentType: "application/json",
+    success: function(response) {
+      console.log("Response from the server:", response);
+    },
+    error: function(xhr, status, error) {
+      console.error("Error:", error);
     }
   });
 }
