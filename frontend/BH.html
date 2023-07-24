@@ -11,69 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <title>REPORTE DE BALANCE HÍDRICO - DIÁLISIS PERITONEAL</title>  <!-- Titulo Backend -->
     <!-- Ignorar estilos css -->
-  <style>
-    .number-input {
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-    }
-    .title {
-      color: red;
-      text-align: center;
-    }
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 20vh;
-    }
-    .column {
-      display: flex;
-      flex-direction: column;
-      margin: 0 20px;
-    }
-    .input-container {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .label {
-      font-weight: bold;
-    }
-    .input-field {
-      width: 200px;
-    }
-    .dropdown-field {
-      width: 200px;
-    }
-    .auto-field {
-      font-style: italic;
-    }
-    table {
-        margin-top: 20px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    th,
-    td {
-      border: 1px solid black;
-      padding: 10px;
-      text-align: center;
-    }
-    th:first-child,
-    td:first-child {
-      background-color: #333333;
-      color: white;
-    }
-    th,
-    tr:first-child {
-      background-color: #666666;
-      color: white;
-    }
-  </style>
+ 
     <!-- Aqui terminan los estilos -->
   <script>
     function getCurrentDateTime() {//Funcion que busca la fecha y hora
@@ -88,7 +26,7 @@
     function displayUsername() {//Funcion que usa el username con el que se logeo - username vale lo que vale el username utilizado.
       var username = localStorage.getItem("username");
       if (username) {
-        document.getElementById("user").textContent = "Logeado como: " + username;
+        document.getElementById("user").textContent = "Logeado como:  " + username;
       }
     }
     
@@ -98,58 +36,94 @@
     });
   </script>
 </head>
-<body>
-  <h2 class="title">REPORTE DE BALANCE HÍDRICO - DIÁLISIS PERITONEAL</h2>  <!-- Titulo rojo -->
+<body class="bg-light">
+
+  <div class="container py-5">
+  <h2 class="text-center mb-4 text-primary">REPORTE DE BALANCE HÍDRICO - DIÁLISIS PERITONEAL</h2>  <!-- Titulo rojo -->
   
-  <div class="container">
-    <div class="column">
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
       <div id="user"></div><!-- div que cambia al abrir la pagina que cambia a logeado como (user) -->
-
-      <div class="input-container"><!-- paciente -->
-        <label class="label" for="paciente">Paciente:</label>
-        <input class="input-field" type="text" id="pc" name="paciente"><!-- id = pc -->
+<div class="card" style="background-color: rgb(251, 251, 251);">
+  <div class="card-body">
+    <center><img src=./img/USER.png alt="centered image" width="100" height="100"></center>
+    <form> 
+      
+      <div class="mb-3"><!-- paciente -->
+        <label class="form-label" for="paciente">Paciente:</label>
+        <input class="form-control" type="text" id="pc" name="paciente"><!-- id = pc -->
       </div>
 
-      <div class="input-container"><!-- Input de Fecha -->
-        <label class="label" for="date">Fecha:</label>
-        <input class="input-field" type="text" id="date" name="date"><!-- id = date -->
+      <div class="mb-3"><!-- cedula -->
+        <label class="form-label" for="cedula">Cédula:</label>
+        <input class="form-control" type="text" id="cedula" name="cedula"><!-- id = pc -->
       </div>
 
-      <div class="input-container"><!-- Dropdown de sistema -->
-        <label class="label" for="system">Sistema:</label>
-        <select class="dropdown-field" id="sys" name="system"><!-- id = sys -->
-          <option value="Baxter">Baxter</option>
-          <option value="Fresenius Medical Care">Fresenius Medical Care</option>
+      <div class="mb-3"><!-- cedula -->
+        <label class="form-label" for="seguro-social">Seguro social:</label>
+        <input class="form-control" type="text" id="seguro-social" name="seguro-social"><!-- id = pc -->
+      </div>
+
+      <div class="mb-3"><!-- Dropdown de sistema -->
+        <label class="form-label" for="system">Sistema:</label>
+        <select class="form-select" id="sys" name="system"><!-- id = sys -->
+          <option value="Baxter">BAXTER</option>
+          <option value="Fresenius Medical Care">FRESENIUS MEDICAL CARE</option>
         </select>
       </div>
 
-      <div class="input-container"><!-- Presion arterial, en medio de pa y pa2 hay un / con brackets h2 -->
-        <label class="label" for="pa">P/A:</label>
-        <input class="number-input" type="number" id="pa" name="pa"><!-- id = pa -->
-        <h2>/</h2>
-        <input class="number-input" type="number" id="pa2" name="pa2"><!-- id = pa2 -->
+
+
+      <div class="form-label"><!-- Presion arterial, en medio de pa y pa2 hay un / con brackets h2 -->
+        <label class="form-label" for="pa">P/A:</label>
+        <input class="form-control number-input" type="number" id="pa" name="pa"><!-- id = pa -->
+        <h2 style="text-align: center;">/</h2>
+        <input class="form-control number-input" type="number" id="pa2" name="pa2"><!-- id = pa2 -->
       </div>
 
-      <div class="input-container"><!-- pulso -->
-        <label class="label" for="pulse">Pulso:</label>
-        <input class="input-field" type="text" id="pls" name="pulse"><!-- id = pls -->
+
+
+      <div class="mb-3"><!-- pulso -->
+        <label class="form-label" for="pulse">Pulso:</label>
+        <input class="form-control" type="text" id="pls" name="pulse"><!-- id = pls -->
       </div>
+
+     </div>
     </div>
+  </form> 
+  </div>
+
+  <div class="mb-5">
+
+  </div>
+  <!-- Segunda tarjeta ---->
+
+  <div class="card" style="background-color:rgb(251, 251, 251);">
+    <div class="card-body">
+       <center><img class=""src="./img/RELOJ.png" alt="centered image" width="50" height="50></center>
+       
+       <form>
 
     <div class="column"><!-- Estas son los "inputs" que reciben la fecha y la hora automaticamente -->
-      <div class="input-container">
-        <label class="label" for="dateAuto">Fecha:</label>
-        <input class="auto-field" type="text" id="dateAuto" name="dateAuto" readonly><!-- id = dateAuto -->
+      <div class="mb-4">
+        <label class="form-label" for="dateAuto">Fecha:</label>
+        <input class="form-control" type="text" id="dateAuto" name="dateAuto" readonly><!-- id = dateAuto -->
       </div>
 
-      <div class="input-container">
-        <label class="label" for="timeAuto">Hora:</label>
-        <input class="auto-field" type="text" id="timeAuto" name="timeAuto" readonly><!-- id = timeAuto -->
+      <div class="mb-4">
+        <label class="form-label" for="timeAuto">Hora:</label>
+        <input class="form-control" type="text" id="timeAuto" name="timeAuto" readonly><!-- id = timeAuto -->
       </div>
+    </form>
     </div>
+
+
   </div>
+</div>
+</div>
   
-  <table><!-- Esta es la tabla -->
+  <table class="table table-bordered table-dark"><!-- Esta es la tabla -->
     <tr>
         <th></th>
         <th colspan="2">Fase I</th>
@@ -247,7 +221,7 @@
 
     // Generate the PDF
     var doc = new jsPDF();
-    doc.text('Title: ' + title, 10, 10);//titulo del pdf
+    doc.text('Titulo: ' + title, 10, 10);//titulo del pdf
     doc.text([//Cuerpo del pdf, debe hacerse en formato de arreglo para que tenga corte de lineas.
         "nombre: " + name , 
         "fecha: " + date , 
@@ -264,9 +238,9 @@
 }
   </script>
   <div class="container">
-    <input type="button" value="Calcular" onclick="calcularBh()"><!-- calcular los valores en la tabla -->
-    <input type="button" id="genPDF" value="Descargar" onclick="genpdf()"><!-- generar el pdf -->
-    <input type="button" value="Gráfico" onclick="showChart()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <input type="button" value="Calcular" onclick="calcularBh()" class="btn btn-outline-primary"><!-- calcular los valores en la tabla -->
+    <input type="button" id="genPDF" value="Descargar" onclick="genpdf()" class="btn btn-outline-success"><!-- generar el pdf -->
+    <input type="button" value="Gráfico" onclick="showChart()" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   </div>
 
   <div class="container" id="analysis-result-container" style="display:none;">
@@ -299,8 +273,7 @@
       </div>
     </div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>  
 </body>
 </html>

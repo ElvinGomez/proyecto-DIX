@@ -66,11 +66,8 @@ function evaluarPulsaciones(_latidos) {
 
 function calcularBh(){
   pc = document.getElementById('pc').value
-  dt = document.getElementById('date').value
   if(pc.trim() === ''){
     return alert('Ingrese un nombre del paciente')
-  } else if(dt.trim() === ''){
-    return alert('Ingrese una fecha')
   }
     drValues = [];
     cuValues = [];
@@ -167,8 +164,8 @@ function calcularBh(){
         enviarCorreo(medAlerts)
         addRecord({
           patient: pc,
-          "social_number": "1111",
-          "id_number": "1111",
+          "social_number": document.getElementById('seguro-social').value ?? '',
+          "id_number": document.getElementById('cedula').value ?? '',
           "date": `${new Date()}`,
           // "blood_pressure_systolic": "",
           // "blood_pressure_diastolic": "",

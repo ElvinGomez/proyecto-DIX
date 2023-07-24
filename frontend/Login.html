@@ -1,28 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="./css/estilo.css">
   <title>Login</title><!-- Titulo -->
   <!-- Estilos -->
-  <style>
-    .login{
-        margin: auto;
-        width: 50%;
-        border: 1px solid green;
-        padding: 10px;
-
-    }
-    #credentialsBox {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 10px;
-      background-color: #f2f2f2;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-    }
-  </style>
+ 
   <script>
     function validate() {//Funcion de validacion.
       var username = document.getElementById("username").value;
@@ -47,38 +32,49 @@
 
       if (username === "usuario_MD" && password === "nefrologodp") {
         localStorage.setItem("username", username);
-        window.location.href = "BH.html";
+        window.location.href = "RegistrCitas.html";
       } else if (username === "usuario_ENF" && password === "enfermeriadp") {
         localStorage.setItem("username", username);
-        window.location.href = "BH.html";
+        window.location.href = "RegistrCitas.html";
       } else if (username === "usuario_PD" && password === "pacientedp") {
         localStorage.setItem("username", username);
-        window.location.href = "BH.html";
+        window.location.href = "RegistrCitas.html";
       } else {
         alert("Usuario o contraseña incorrectas.");
       }
     }
+
+    console.log("Credenciales: usuario_MD / nefrologodp    usuario_ENF / enfermeriadp  usuario_PD / pacientedp");
   </script>
 </head>
 <body>
-  <div id="credentialsBox">  <!-- Caja que contiene credenciales que funcionan -->
-    <strong>Credenciales:</strong><br>
-    - usuario_MD / nefrologodp<br>
-    - usuario_ENF / enfermeriadp<br>
-    - usuario_PD / pacientedp<br>
+
+  <div class="sidenav">
+    <div class="login-main-text">
+       <h2>BIENVENIDO<br>LOGIN</h2>
+       <p>Desarrollo de Software IX</p>
+    </div>
   </div>
-  <div class="login">
-    <h2>Login </h2>
+
+<div class="main">
+<div class="col-md-6 col-sm-12">
+  <div class="login-form">
     <form>
+      <div class="form-group">
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required><br>
-  
+      <input type="text" id="username" name="username" class="form-control"><br>
+    </div>
+    <div class="form-group">
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br>
-  
-      <input type="button" value="Login" onclick="validate()">  <!-- Boton 1 -->
-      <input type="button" value="Citas" onclick="validate2()">  <!-- Boton 2 -->
-    </form></div>
+      <input type="password" id="password" name="password" class="form-control"><br>
+    </div>
+
+      <input type="button" class="btn btn-black" value="Login" onclick="validate()"><!-- Boton 1 -->
+      <input type="button" class="btn btn-secondary" value="Citas" onclick="validate2()"><!-- Boton 2 -->
+    </form>
+  </div>
+</div>
+</div>
   
 </body>
 </html>
